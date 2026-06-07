@@ -23,6 +23,8 @@ Daybreak님의 AbilityWar 커스텀 애드온 프로젝트입니다.
 
 * **License:** AbilityWar는 능력자 전쟁 라이선스 규칙에 따라 라이선스가 부여되고 관리됩니다.
 
+---
+
 ### ⚙️ 적용 방법 (How to Apply)
 * AbilityWar 플러그인을 다운로드하여 서버의 `plugins` 폴더에 넣습니다
 * 서버를 실행한 후 종료하거나 새로고침하여 필요한 폴더들을 생성합니다.
