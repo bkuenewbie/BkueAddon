@@ -22,4 +22,3 @@ Daybreak님의 AbilityWar 커스텀 애드온 프로젝트입니다.
 ### 📋 License & Contribute
 
 * **License:** AbilityWar는 능력자 전쟁 라이선스 규칙에 따라 라이선스가 부여되고 관리됩니다.
-* **Contribute:** 추가 개발은 모든 개발자에게 열려 있습니다. 자신만의 Fork를 만들고 Build를 구성해 보세요. 참신한 기능이나 최적화 코드를 작성하셨다면 Pull Request를 통해 언제든 기여하실 수 있습니다.
