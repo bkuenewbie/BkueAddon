@@ -4,7 +4,6 @@ import BkueNewbie.bkueAddon.ability.list.*;
 import daybreak.abilitywar.ability.AbilityFactory;
 import daybreak.abilitywar.addon.Addon;
 import daybreak.abilitywar.game.manager.AbilityList;
-import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 
 public final class BkueAddon extends Addon implements Listener {
@@ -13,7 +12,7 @@ public final class BkueAddon extends Addon implements Listener {
     public void onEnable() {
         // Plugin enable logic
 
-        Bukkit.broadcastMessage("§b블루 §9애드온§e이 적용되었습니다.");
+        System.out.println("§b블루 §9애드온§e이 적용되었습니다.");
 
         AbilityFactory.registerAbility(Archangel.class);
         AbilityList.registerAbility(Archangel.class);
@@ -45,9 +44,6 @@ public final class BkueAddon extends Addon implements Listener {
         AbilityFactory.registerAbility(SevenThree.class);
         AbilityList.registerAbility(SevenThree.class);
 
-        AbilityFactory.registerAbility(Master.class);
-        AbilityList.registerAbility(Master.class);
-
         AbilityFactory.registerAbility(Mom.class);
         AbilityList.registerAbility(Mom.class);
 
@@ -75,9 +71,6 @@ public final class BkueAddon extends Addon implements Listener {
         AbilityFactory.registerAbility(SecondWind.class);
         AbilityList.registerAbility(SecondWind.class);
 
-        AbilityFactory.registerAbility(Immortal.class);
-        AbilityList.registerAbility(Immortal.class);
-
         AbilityFactory.registerAbility(HeavyArmor.class);
         AbilityList.registerAbility(HeavyArmor.class);
 
@@ -86,6 +79,21 @@ public final class BkueAddon extends Addon implements Listener {
 
         AbilityFactory.registerAbility(Sharpness.class);
         AbilityList.registerAbility(Sharpness.class);
+
+
+        //1.0.1
+        AbilityFactory.registerAbility(Immortal.class);
+        AbilityList.registerAbility(Immortal.class);
+
+        AbilityFactory.registerAbility(PositionMaster.class);
+        AbilityList.registerAbility(PositionMaster.class);
+
+        AbilityFactory.registerAbility(Mace.class);
+        AbilityList.registerAbility(Mace.class);
+
+        AbilityFactory.registerAbility(Seesaw.class);
+        AbilityList.registerAbility(Seesaw.class);
+
     }
 
     @Override

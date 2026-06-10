@@ -153,6 +153,12 @@ public class Blue extends AbilityBase implements ActiveHandler {
                     runner.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 3));
                     ParticleLib.SNOWBALL.spawnParticle(runner.getLocation().add(0, 1, 0), 0.2f, 0.2f, 0.2f, 3, 0.0);
                 }
+
+                Vector currentVelocity = runner.getVelocity();
+                if (currentVelocity.getX() != 0 || currentVelocity.getZ() != 0) {
+                    Vector dampenedVelocity = currentVelocity.setX(currentVelocity.getX() * 0.2).setZ(currentVelocity.getZ() * 0.2);
+                    runner.setVelocity(dampenedVelocity);
+                }
             }
         }
     }

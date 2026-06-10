@@ -70,8 +70,23 @@ public class PhantomReaper extends AbilityBase implements ActiveHandler {
             }
 
             Location targetLoc = origin.clone().add(direction.multiply(12));
-            targetLoc.setY(getPlayer().getWorld().getHighestBlockAt(targetLoc).getLocation().getY() + 1);
             targetLoc.setDirection(origin.getDirection());
+
+            double startY = origin.getY() + 2;
+            targetLoc.setY(startY);
+
+            while (targetLoc.getY() > targetLoc.getWorld().getMinHeight()) {
+                Material blockType = targetLoc.getBlock().getType();
+                if (blockType != Material.AIR && blockType != Material.BARRIER && blockType != Material.LIGHT) {
+                    targetLoc.setY(targetLoc.getBlockY() + 1);
+                    break;
+                }
+                targetLoc.add(0, -1, 0);
+            }
+
+            if (targetLoc.getY() <= targetLoc.getWorld().getMinHeight()) {
+                targetLoc.setY(origin.getY());
+            }
 
             double distance = origin.distance(targetLoc);
             for (double d = 0; d < distance; d += 0.5) {
@@ -82,7 +97,7 @@ public class PhantomReaper extends AbilityBase implements ActiveHandler {
             for (Entity entity : getPlayer().getWorld().getNearbyEntities(origin, 14, 14, 14)) {
                 if (entity instanceof LivingEntity && targetFilter.test(entity)) {
                     LivingEntity victim = (LivingEntity) entity;
-                    if (origin.distance(victim.getLocation()) <= 12) {
+                    if (isPointNearLine(victim.getLocation(), origin, targetLoc, 2.0)) {
                         victim.damage(8.0, getPlayer());
                         ParticleLib.CRIT_MAGIC.spawnParticle(victim.getLocation().add(0, 1, 0), 0.2f, 0.4f, 0.2f, 5, 0.1);
                     }

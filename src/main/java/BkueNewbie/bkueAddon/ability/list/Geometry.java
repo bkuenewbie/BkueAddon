@@ -38,7 +38,7 @@ public class Geometry extends AbilityBase implements ActiveHandler {
     }
 
     public static final SettingObject<Integer> COOLDOWN_CONFIG = abilitySettings.new SettingObject<Integer>(
-            Geometry.class, "cooldown", 45, "# 결계 완성 후 쿨타임") {
+            Geometry.class, "cooldown", 10, "# 결계 완성 후 쿨타임") {
         @Override
         public boolean condition(Integer value) { return value >= 0; }
         @Override
