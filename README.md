@@ -37,7 +37,7 @@
 | Developer | 블루 (BkueNewbie) |
 | Minecraft | 1.20.4 |
 | Framework | AbilityWar 3.5.0 |
-| Java | Java 8 |
+| Java | Java 17 |
 
 ---
 
