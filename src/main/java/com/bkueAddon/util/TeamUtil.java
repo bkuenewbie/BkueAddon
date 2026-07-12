@@ -1,4 +1,4 @@
-package BkueNewbie.bkueAddon.util;
+package com.bkueAddon.util;
 
 import daybreak.abilitywar.game.AbstractGame.Participant;
 import daybreak.abilitywar.game.team.interfaces.Teamable;

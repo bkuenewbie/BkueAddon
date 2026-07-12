@@ -1,4 +1,4 @@
-package BkueNewbie.bkueAddon.ability.list;
+package com.bkueAddon.ability.list;
 
 import daybreak.abilitywar.ability.AbilityBase;
 import daybreak.abilitywar.ability.AbilityManifest;
@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 @AbilityManifest(name = "도곰", rank = Rank.A, species = Species.HUMAN, explain = {
         "§7철괴 우클릭 §8- §c반격 태세§f: 다음 공격이 자신에게 적중하면 피해를 무효화하고, 적에게 적중하면 피해가 30% 증가합니다. $[COOLDOWN_CONFIG]",
-        "§8아이디어 제공: 도곰"
+        "§e아이디어 제공: §bddobear"
 }, summarize = {
         "다음 공격을 막거나 강화합니다."
 })

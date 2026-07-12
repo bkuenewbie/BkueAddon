@@ -1,4 +1,4 @@
-package BkueNewbie.bkueAddon.ability.list;
+package com.bkueAddon.ability.list;
 
 import daybreak.abilitywar.ability.AbilityBase;
 import daybreak.abilitywar.ability.AbilityManifest;

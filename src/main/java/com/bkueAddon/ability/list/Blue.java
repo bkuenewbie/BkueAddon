@@ -1,8 +1,8 @@
-package BkueNewbie.bkueAddon.ability.list;
+package com.bkueAddon.ability.list;
 
-import BkueNewbie.bkueAddon.util.LocationUtilEx;
-import BkueNewbie.bkueAddon.util.SnapshotUtil;
-import BkueNewbie.bkueAddon.util.TeamUtil;
+import com.bkueAddon.util.LocationUtilEx;
+import com.bkueAddon.util.SnapshotUtil;
+import com.bkueAddon.util.TeamUtil;
 import daybreak.abilitywar.ability.AbilityBase;
 import daybreak.abilitywar.ability.AbilityManifest;
 import daybreak.abilitywar.ability.AbilityManifest.*;

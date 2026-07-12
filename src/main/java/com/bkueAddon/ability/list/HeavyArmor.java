@@ -1,4 +1,4 @@
-package BkueNewbie.bkueAddon.ability.list;
+package com.bkueAddon.ability.list;
 
 import daybreak.abilitywar.ability.Tips.*;
 import org.bukkit.potion.PotionEffect;

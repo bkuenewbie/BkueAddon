@@ -1,4 +1,4 @@
-package BkueNewbie.bkueAddon.util;
+package com.bkueAddon.util;
 
 import daybreak.abilitywar.utils.base.math.LocationUtil;
 import daybreak.abilitywar.utils.base.minecraft.block.Blocks;

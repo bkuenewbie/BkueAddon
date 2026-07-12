@@ -1,4 +1,4 @@
-package BkueNewbie.bkueAddon.ability.list;
+package com.bkueAddon.ability.list;
 
 import daybreak.abilitywar.ability.AbilityBase;
 import daybreak.abilitywar.ability.AbilityManifest;
@@ -21,8 +21,7 @@ public class Immortal extends AbilityBase {
 
     @Override protected void onUpdate(Update update) {
         if (update == Update.RESTRICTION_CLEAR) {
-            ItemStack totem = new ItemStack(Material.TOTEM, 1);
-            getPlayer().getInventory().addItem(totem);
+            getPlayer().getInventory().addItem(new ItemStack(Material.TOTEM_OF_UNDYING));
         }
     }
 }

@@ -1,4 +1,4 @@
 name: BkueAddon
-version: 1.0.0
-main: BkueNewbie.bkueAddon.BkueAddon
+version: 1.0.1
+main: com.bkueAddon.BkueAddon
 displayName: §b블루 §9애드온

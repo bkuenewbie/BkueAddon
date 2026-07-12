@@ -1,6 +1,7 @@
-package BkueNewbie.bkueAddon;
+package com.bkueAddon;
 
-import BkueNewbie.bkueAddon.ability.list.*;
+import com.bkueAddon.ability.list.*;
+import com.bkueAddon.ability.list.*;
 import daybreak.abilitywar.AbilityWar;
 import daybreak.abilitywar.ability.AbilityFactory;
 import daybreak.abilitywar.addon.Addon;
