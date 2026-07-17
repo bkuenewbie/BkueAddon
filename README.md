@@ -1,6 +1,6 @@
 # 📘 블루애드온 (BkueAddon)
 
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.12.2-brightgreen.svg)]()
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.4-brightgreen.svg)]()
 [![AbilityWar](https://img.shields.io/badge/AbilityWar-3.5.0-blue.svg)](https://github.com/Daybreak365/AbilityWar)
 [![Status](https://img.shields.io/badge/Status-Active-orange.svg)]()
 
@@ -35,9 +35,9 @@
 | 항목 | 내용 |
 |------|------|
 | Developer | 블루 (BkueNewbie) |
-| Minecraft | 1.12.2 |
+| Minecraft | 1.20.4 |
 | Framework | AbilityWar 3.5.0 |
-| Java | Java 8 |
+| Java | Java 17 |
 
 ---
 
