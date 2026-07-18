@@ -17,11 +17,11 @@ import daybreak.abilitywar.utils.library.PotionEffects;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 @AbilityManifest(name = "블루", rank = Rank.SPECIAL, species = Species.HUMAN, explain = {
-        "§7패시브 §8- §b빙결 적응§f: 얼음 위에 있을 때 §6힘 I§f, §3저항 I§f, §b신속 I§f를 얻습니다.",
-        "- 얼음 위에서 공격하면 대상을 1초간 속박합니다.",
+        "§7패시브 §8- §b빙결 적응§f: 얼음 위에 있을 때 §6힘 I§f, §3저항 I§f, §b신속 I§f를 얻고, 얼음 위에서 공격하면 대상을 1초간 속박합니다.",
         "§7패시브 §8- §b영구 동토§f: 플레이어를 처치하면 해당 위치 주변 $[RANGE_CONFIG]칸이 얼음으로 변합니다.",
         "§7철괴 우클릭 §8- §b빙결 지대§f: 5초 동안 주변 $[RANGE_CONFIG]칸을 얼음으로 바꾸고 범위 내 적을 3초간 속박합니다. $[COOLDOWN_CONFIG]"
 }, summarize = {
@@ -137,5 +137,21 @@ public class Blue extends AbilityBase implements ActiveHandler {
         if (!getPlayer().equals(victim.getKiller())) return;
 
         permanentIce.fillCircle(victim.getLocation(), RANGE_CONFIG.getValue(), Material.ICE);
+    }
+
+    @SubscribeEvent
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
+        if (!e.getDamager().equals(getPlayer())) return;
+        if (!(e.getEntity() instanceof Player)) return;
+
+        Player target = (Player) e.getEntity();
+
+        Material below = getPlayer().getLocation().clone().subtract(0, 1, 0).getBlock().getType();
+
+        if (below != Material.ICE) return;
+        if (!getGame().isParticipating(target)) return;
+        if (TeamUtil.isTeammate(getPlayer(), target)) return;
+
+        Rooted.apply(getGame().getParticipant(target), TimeUnit.SECONDS, 1);
     }
 }
