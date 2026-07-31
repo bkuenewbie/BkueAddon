@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-@AbilityManifest(name = "사무라이", rank = Rank.A, species = Species.HUMAN, explain = {
+@AbilityManifest(name = "사무라이", rank = Rank.S, species = Species.HUMAN, explain = {
         "§7철괴 우클릭 §8- §c섬광베기§f: 주변 $[RANGE_CONFIG]칸 내 적들에게 순식간에 이동하며 3초간 속박합니다. $[COOLDOWN_CONFIG]"
 }, summarize = {
         "주변 적들을 빠르게 베며 속박합니다."
