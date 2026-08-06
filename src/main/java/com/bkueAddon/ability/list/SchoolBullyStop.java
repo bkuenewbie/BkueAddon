@@ -15,7 +15,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 @AbilityManifest(name = "학교 폭력 멈춰", rank = Rank.S, species = Species.HUMAN, explain = {
         "§7철괴 우클릭 §8- §b학교 폭력 멈춰§f: 10초 동안 모든 플레이어가 공격으로 피해를 줄 수 없게 합니다. $[COOLDOWN_CONFIG]",
-        "§7아이디어 제공 §8- §6쏘달"
+        "§7아이디어 제공 §8- §6sodaal"
 }, summarize = {
         "10초 동안 모든 플레이어의 공격을 막습니다."
 })

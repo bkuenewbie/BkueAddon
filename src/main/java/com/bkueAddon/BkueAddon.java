@@ -1,9 +1,9 @@
 package com.bkueAddon;
 
 import com.bkueAddon.ability.list.*;
-import com.bkueAddon.ability.list.*;
 import com.bkueAddon.ability.list.IDieYouDie.IDieYouDie;
 import com.bkueAddon.game.list.PublicAbility;
+import com.bkueAddon.updater.BkueAddonUpdater;
 import daybreak.abilitywar.AbilityWar;
 import daybreak.abilitywar.ability.AbilityFactory;
 import daybreak.abilitywar.addon.Addon;
@@ -18,11 +18,13 @@ import org.bukkit.event.Listener;
 
 public class BkueAddon extends Addon implements Listener {
 
+    private BkueAddonUpdater updater;
+
     Class<?>[] abilities = {
             Blue.class, Dud.class, HeavyArmor.class, Immortal.class, Sharpness.class,
             BaseballPlayer.class, Dodge.class, Reverse.class, Samurai.class, Ddobear.class,
             Bomber.class, BoundJumper.class, CursedOne.class, DeathDeferment.class, EnchantRich.class,
-            IDieYouDie.class, SchoolBullyStop.class
+            IDieYouDie.class, SchoolBullyStop.class, Streamer.class, Sodaal.class
     };
 
     Class<?>[] games = {
@@ -36,6 +38,8 @@ public class BkueAddon extends Addon implements Listener {
         registerAll();
 
         Bukkit.getPluginManager().registerEvents(this, AbilityWar.getPlugin());
+
+        updater = new BkueAddonUpdater(this);
 
         Bukkit.broadcastMessage("§b블루 §9애드온§e이 적용되었습니다.");
         Bukkit.broadcastMessage("§e능력 §f" + abilities.length + "개 적용 완료.");
