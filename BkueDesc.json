@@ -1,0 +1,25 @@
+{
+  "format": "GITHUB",
+  "author": "bkuenewbie",
+  "repository": "BkueAddon",
+  "name": "BkueAddon",
+  "displayName": "블루 애드온",
+  "developer": "블루",
+  "icon": "5c5a80d4-f084-4794-b9b3-3ca22c999b73",
+  "links": [
+    {
+      "name": "Github",
+      "link": "https://github.com/bkuenewbie/BkueAddon"
+    }
+  ],
+  "description": [
+    "§b블루§7가 직접 만든 다양한 아이디어의 §9애드온§7!",
+    "§7개성 넘치는 능력들과 재미있는 콘텐츠를 만나보세요!",
+    "§7능력자 전쟁을 더욱 색다르게 즐길 수 있습니다.",
+    " ",
+    "§7새로운 능력과 콘텐츠가 지속적으로 추가됩니다!",
+    " ",
+    "§b>>> §e개발자 §7: §b블루",
+    "§b>>> §eDiscord §7: §b@bkuenewbie"
+  ]
+}
