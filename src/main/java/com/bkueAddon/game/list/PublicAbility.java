@@ -209,18 +209,13 @@ public class PublicAbility extends Game implements DefaultKitHandler, Observer {
 
     private void updateAbilityNames() {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
-
-        if (scoreboard == null) {
-            return;
-        }
+        if (scoreboard == null) return;
 
         for (Participant participant : getParticipants()) {
             Player player = participant.getPlayer();
-
             player.setScoreboard(scoreboard);
 
             String teamName = "aw_" + player.getUniqueId().toString().substring(0, 12);
-
             Team team = scoreboard.getTeam(teamName);
 
             if (team == null) {
@@ -234,7 +229,33 @@ public class PublicAbility extends Game implements DefaultKitHandler, Observer {
             }
 
             if (participant.hasAbility()) {
-                team.setPrefix("§7[" + participant.getAbility().getName() + "] §f");
+                String color;
+
+                switch (participant.getAbility().getRank()) {
+                    case C:
+                        color = "§e";
+                        break;
+                    case B:
+                        color = "§b";
+                        break;
+                    case A:
+                        color = "§a";
+                        break;
+                    case S:
+                        color = "§d";
+                        break;
+                    case L:
+                        color = "§6";
+                        break;
+                    case SPECIAL:
+                        color = "§c";
+                        break;
+                    default:
+                        color = "§7";
+                        break;
+                }
+
+                team.setPrefix(color + "[" + participant.getAbility().getName() + "] §f");
             } else {
                 team.setPrefix("§7[능력 없음] §f");
             }

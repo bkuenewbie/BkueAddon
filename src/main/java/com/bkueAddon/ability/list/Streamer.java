@@ -10,7 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-@AbilityManifest(name = "방송인", rank = Rank.SPECIAL, species = Species.HUMAN, explain = {
+@AbilityManifest(name = "방송인", rank = Rank.L, species = Species.HUMAN, explain = {
         "§7패시브 §8- §b시선 집중§f: 자신을 바라보고 있는 플레이어가 많을수록 강해집니다.",
         "§7- §f관전자는 시선 수에 포함되지 않습니다.",
         "§7아이디어 제공 §8- §6sodaal"
