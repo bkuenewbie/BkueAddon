@@ -1,54 +1,60 @@
-# 📘 블루애드온 (BkueAddon)
+# 📘 BkueAddon
 
-**AbilityWar** 기반으로 제작된 커스텀 능력 애드온입니다.
+**BkueAddon**은 **AbilityWar**을 기반으로 만든 커스텀 애드온입니다.
 
-다양한 신규 능력과 콘텐츠를 추가하여 AbilityWar를 더욱 재미있게 즐길 수 있도록 제작되었습니다.
-
----
-
-# 📬 피드백 및 문의
-
-버그 제보, 능력 제안 및 기타 문의는 아래에서 해주세요.
-
-* 💡 Discord: https://discord.gg/4YBAWXM3WZ
-* 🐛 GitHub Issues: https://github.com/bkuenewbie/BkueAddon/issues
-
-여러분의 피드백과 아이디어를 적극적으로 반영하고 있습니다.
+새로운 능력과 콘텐츠를 추가해 AbilityWar를 더욱 재미있게 즐길 수 있도록 제작했습니다.
 
 ---
 
-# 💻 개발 환경
+## ✨ 주요 내용
 
-| 항목        | 내용               |
-| --------- | ---------------- |
-| Developer | 블루 (BkueNewbie)  |
-| Minecraft | 1.20.4           |
-| Framework | AbilityWar 3.5.0 |
-| Java      | Java 17          |
+- 🧩 다양한 커스텀 능력
+- 🎮 새로운 게임 콘텐츠
+- 💡 지속적인 능력 및 콘텐츠 추가
+- 🛠️ 커뮤니티 피드백 반영
 
 ---
 
-# 📖 능력 및 콘텐츠
+## 💻 개발 환경
 
-블루애드온은 다양한 개성 있는 능력과 콘텐츠를 지속적으로 추가하고 있습니다.
-
-새로운 능력과 아이디어는 업데이트를 통해 계속 추가될 예정입니다.
-
----
-
-# ⚠️ 안내
-
-* 본 애드온은 **AbilityWar를 기반으로 제작되었습니다.**
-* AbilityWar의 개발 및 원작에 감사드립니다.
-* 본 애드온은 **Daybreak님의 승인을 받아 AbilityWar 애드온으로 제공됩니다.**
-* 서버 적용 전 월드 및 서버 데이터의 백업을 권장합니다.
+| 항목 | 내용 |
+|---|---|
+| 개발자 | 블루 (BkueNewbie) |
+| Minecraft | 1.20.4 |
+| AbilityWar | 3.5.0 |
+| Java | 17 |
 
 ---
 
-# 📄 Credits
+## 📥 최신 버전
 
-**AbilityWar**
-© Daybreak
+**최신 버전:** `v1.0.6`
 
-**BkueAddon**
-© BkueNewbie
+👉 [최신 버전 다운로드](https://github.com/bkuenewbie/BkueAddon/releases/latest)
+
+## 📬 문의 및 피드백
+
+---
+
+버그 제보, 능력 아이디어, 문의사항은 아래에서 알려주세요.
+
+- 💬 Discord: https://discord.gg/4YBAWXM3WZ
+- 🐛 GitHub Issues: https://github.com/bkuenewbie/BkueAddon/issues
+
+여러분의 아이디어와 피드백을 적극적으로 반영하고 있습니다!
+
+---
+
+## 📄 Credits
+
+### BkueAddon
+**개발자:** BkueNewbie
+
+**아이디어 제공자:**
+- goodhyojun
+- sodaal
+- ohsb0703
+- ddobear
+
+### AbilityWar
+**개발자:** Daybreak
