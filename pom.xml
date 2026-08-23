@@ -6,7 +6,7 @@
 
     <groupId>BkueNewbie</groupId>
     <artifactId>BkueAddon</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <packaging>jar</packaging>
 
     <name>BkueAddon</name>
@@ -63,9 +63,9 @@
         <dependency>
             <groupId>com.daybreak365</groupId>
             <artifactId>AbilityWar</artifactId>
-            <version>3.5.0</version>
+            <version>3.6.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/AbilityWar-3.5.0.jar</systemPath>
+            <systemPath>${project.basedir}/libs/AbilityWar-3.6.0.jar</systemPath>
         </dependency>
 
         <dependency>

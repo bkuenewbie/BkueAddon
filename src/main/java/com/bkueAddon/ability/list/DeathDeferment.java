@@ -5,9 +5,6 @@ import daybreak.abilitywar.ability.AbilityManifest;
 import daybreak.abilitywar.ability.AbilityManifest.Rank;
 import daybreak.abilitywar.ability.AbilityManifest.Species;
 import daybreak.abilitywar.ability.SubscribeEvent;
-import daybreak.abilitywar.ability.Tips;
-import daybreak.abilitywar.ability.Tips.Level;
-import daybreak.abilitywar.ability.Tips.Stats;
 import daybreak.abilitywar.game.AbstractGame.Participant;
 import daybreak.abilitywar.utils.base.concurrent.TimeUnit;
 import daybreak.abilitywar.utils.library.ParticleLib;
@@ -53,14 +50,20 @@ public class DeathDeferment extends AbilityBase {
         @Override
         protected void run(int count) {
             remainingTime--;
-            double progress = (double) remainingTime / 90.0;
-            bossBar.setProgress(Math.max(0, Math.min(1.0, progress)));
+
+            bossBar.setProgress(Math.max(0, Math.min(1, remainingTime / 90.0)));
             bossBar.setTitle("§4[죽음의 유예] §c즉사까지 §e" + remainingTime + "초 §c남음");
 
+            if (remainingTime <= 10) {
+                SoundLib.BLOCK_NOTE_BLOCK_BASS.playSound(getPlayer(), 1, 0.8f);
+                ParticleLib.REDSTONE.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0.4f, 0.6f, 0.4f, 8, 0);
+            }
+
             if (remainingTime <= 0) {
-                getPlayer().damage(1000.0);
-                SoundLib.ENTITY_LIGHTNING_BOLT_THUNDER.playSound(getPlayer().getLocation(), 1.0f, 0.8f);
                 ParticleLib.EXPLOSION_HUGE.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0, 0, 0, 1, 0);
+                SoundLib.ENTITY_LIGHTNING_BOLT_THUNDER.playSound(getPlayer().getLocation(), 1, 0.8f);
+                getPlayer().setHealth(0);
+                stop(false);
             }
         }
 
@@ -75,14 +78,13 @@ public class DeathDeferment extends AbilityBase {
         }
 
         public void resetTime() {
-            this.remainingTime = 90;
-            bossBar.setProgress(1.0);
+            remainingTime = 90;
+            bossBar.setProgress(1);
         }
     }
 
     @Override
     protected void onUpdate(Update update) {
-        super.onUpdate(update);
         if (update == Update.RESTRICTION_CLEAR) {
             defermentTimer.start();
         } else if (update == Update.ABILITY_DESTROY) {
@@ -99,9 +101,10 @@ public class DeathDeferment extends AbilityBase {
 
     @SubscribeEvent
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (event.getEntity().getKiller() != null && event.getEntity().getKiller().equals(getPlayer())) {
+        if (getPlayer().equals(event.getEntity().getKiller())) {
             defermentTimer.resetTime();
-            SoundLib.ENTITY_ZOMBIE_VILLAGER_CURE.playSound(getPlayer().getLocation(), 1.0f, 1.2f);
+            SoundLib.ENTITY_ZOMBIE_VILLAGER_CURE.playSound(getPlayer(), 1, 1.2f);
+            ParticleLib.VILLAGER_HAPPY.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0.5f, 0.5f, 0.5f, 15, 0.1);
         }
     }
 }

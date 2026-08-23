@@ -20,9 +20,9 @@ public class BkueAddon extends Addon implements Listener {
 
     Class<?>[] abilities = {
             Blue.class, Dud.class, HeavyArmor.class, Immortal.class, Sharpness.class,
-            BaseballPlayer.class, Dodge.class, Reverse.class, Samurai.class, Ddobear.class,
+            BaseballPlayer.class, Dodge.class, Samurai.class, Ddobear.class,
             Bomber.class, BoundJumper.class, CursedOne.class, DeathDeferment.class, EnchantRich.class,
-            IDieYouDie.class, SchoolBullyStop.class, Streamer.class, Sodaal.class, Daggers.class,
+            IDieYouDie.class, SchoolBullyStop.class, Sodaal.class, Daggers.class,
             Adrenaline.class, BladeCircle.class, Genius.class, Guardian.class, Reflect.class
     };
 

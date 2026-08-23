@@ -17,18 +17,18 @@
 
 ## 💻 개발 환경
 
-| 항목 | 내용 |
-|---|---|
+| 항목 | 내용              |
+|---|-----------------|
 | 개발자 | 블루 (BkueNewbie) |
-| Minecraft | 1.20.4 |
-| AbilityWar | 3.5.0 |
-| Java | 17 |
+| Minecraft | 1.20.4          |
+| AbilityWar | 3.6.0           |
+| Java | 17              |
 
 ---
 
 ## 📥 최신 버전
 
-**최신 버전:** `v1.0.6`
+**최신 버전:** `v1.0.7`
 
 👉 [최신 버전 다운로드](https://github.com/bkuenewbie/BkueAddon/releases/latest)
 

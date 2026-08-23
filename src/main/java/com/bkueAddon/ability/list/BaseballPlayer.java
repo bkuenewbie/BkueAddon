@@ -9,7 +9,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 @AbilityManifest(name = "야구선수", rank = Rank.A, species = Species.HUMAN, explain = {
-        "§7패시브 §8- §6홈런 배트§f: 게임 시작 시 밀치기 V가 부여된 막대를 지급받습니다.",
+        "§7패시브 §8- §6홈런 배트§f: 게임 시작 시 밀치기 III가 부여된 막대를 지급받습니다.",
         "§e아이디어 §b제공: goodhyojun"
 }, summarize = {
         "밀치기 V 막대를 가지고 시작합니다."
@@ -22,9 +22,9 @@ public class BaseballPlayer extends AbilityBase {
     @Override
     protected void onUpdate(Update update) {
         if (update == Update.RESTRICTION_CLEAR) {
-            ItemStack knockbackStick = new ItemStack(Material.STICK, 1);
-            knockbackStick.addUnsafeEnchantment(Enchantment.KNOCKBACK, 5);
-            getPlayer().getInventory().addItem(knockbackStick);
+            ItemStack bat = new ItemStack(Material.STICK);
+            bat.addUnsafeEnchantment(Enchantment.KNOCKBACK, 3);
+            getPlayer().getInventory().addItem(bat);
         }
     }
 }

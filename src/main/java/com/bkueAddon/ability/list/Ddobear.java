@@ -8,11 +8,12 @@ import daybreak.abilitywar.ability.decorator.ActiveHandler;
 import daybreak.abilitywar.config.ability.AbilitySettings;
 import daybreak.abilitywar.game.AbstractGame.Participant;
 import daybreak.abilitywar.utils.base.Formatter;
+import daybreak.abilitywar.utils.library.ParticleLib;
 import daybreak.abilitywar.utils.library.SoundLib;
 import org.bukkit.Material;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-@AbilityManifest(name = "도곰", rank = Rank.A, species = Species.HUMAN, explain = {
+@AbilityManifest(name = "도곰", rank = Rank.S, species = Species.HUMAN, explain = {
         "§7철괴 우클릭 §8- §c반격 태세§f: 다음 공격이 자신에게 적중하면 피해를 무효화하고, 적에게 적중하면 피해가 30% 증가합니다. $[COOLDOWN_CONFIG]",
         "§7아이디어 제공 §8- §6ddobear"
 }, summarize = {
@@ -20,9 +21,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 })
 public class Ddobear extends AbilityBase implements ActiveHandler {
 
-    public static final AbilitySettings.SettingObject<Integer> COOLDOWN_CONFIG = abilitySettings.new SettingObject<Integer>(Ddobear.class, "cooldown", 10,
-            "# 쿨타임") {
-
+    public static final AbilitySettings.SettingObject<Integer> COOLDOWN_CONFIG = abilitySettings.new SettingObject<Integer>(Ddobear.class, "cooldown", 10, "# 쿨타임") {
         @Override
         public boolean condition(Integer value) {
             return value >= 0;
@@ -39,14 +38,14 @@ public class Ddobear extends AbilityBase implements ActiveHandler {
     }
 
     private boolean skill;
-
     private final Cooldown cooldownTimer = new Cooldown(COOLDOWN_CONFIG.getValue());
 
     @Override
     public boolean ActiveSkill(Material material, ClickType clickType) {
         if (material == Material.IRON_INGOT && clickType == ClickType.RIGHT_CLICK && !cooldownTimer.isCooldown() && !skill) {
             skill = true;
-            SoundLib.BLOCK_ANVIL_PLACE.playSound(getPlayer());
+            SoundLib.BLOCK_ANVIL_PLACE.playSound(getPlayer(), 1, 1.5f);
+            ParticleLib.CRIT_MAGIC.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0.3, 0.5, 0.3, 8, 0.1);
             return true;
         }
         return false;
@@ -60,12 +59,16 @@ public class Ddobear extends AbilityBase implements ActiveHandler {
             e.setDamage(e.getDamage() * 1.3);
             skill = false;
             cooldownTimer.start();
-            SoundLib.BLOCK_ANVIL_PLACE.playSound(getPlayer());
+
+            ParticleLib.CRIT_MAGIC.spawnParticle(e.getEntity().getLocation().add(0, 1, 0), 0.4, 0.5, 0.4, 15, 0.1);
+            SoundLib.ENTITY_PLAYER_ATTACK_CRIT.playSound(getPlayer(), 1, 1.2f);
         } else if (e.getEntity().equals(getPlayer())) {
             e.setCancelled(true);
             skill = false;
             cooldownTimer.start();
-            SoundLib.BLOCK_ANVIL_PLACE.playSound(getPlayer());
+
+            ParticleLib.BLOCK_CRACK.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0.4, 0.5, 0.4, 20, 0.1);
+            SoundLib.ITEM_SHIELD_BLOCK.playSound(getPlayer(), 1, 1.2f);
         }
     }
 }

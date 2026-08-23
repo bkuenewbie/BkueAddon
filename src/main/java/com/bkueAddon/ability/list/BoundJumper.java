@@ -11,9 +11,6 @@ import daybreak.abilitywar.ability.AbilityManifest;
 import daybreak.abilitywar.ability.AbilityManifest.Rank;
 import daybreak.abilitywar.ability.AbilityManifest.Species;
 import daybreak.abilitywar.ability.SubscribeEvent;
-import daybreak.abilitywar.ability.Tips;
-import daybreak.abilitywar.ability.Tips.Level;
-import daybreak.abilitywar.ability.Tips.Stats;
 import daybreak.abilitywar.ability.decorator.ActiveHandler;
 import daybreak.abilitywar.config.ability.AbilitySettings.SettingObject;
 import daybreak.abilitywar.game.AbstractGame.Participant;
@@ -34,18 +31,18 @@ public class BoundJumper extends AbilityBase implements ActiveHandler {
         super(participant);
     }
 
-    public static final SettingObject<Integer> ACTIVE_COOLDOWN = abilitySettings.new SettingObject<Integer>(
-            BoundJumper.class, "active-cooldown", 10, "# 버티컬 도약 쿨타임") {
+    public static final SettingObject<Integer> ACTIVE_COOLDOWN = abilitySettings.new SettingObject<Integer>(BoundJumper.class, "active-cooldown", 10, "# 버티컬 도약 쿨타임") {
         @Override
         public boolean condition(Integer value) { return value >= 0; }
+
         @Override
         public String toString() { return Formatter.formatCooldown(getValue()); }
     };
 
-    public static final SettingObject<Integer> PASSIVE_COOLDOWN = abilitySettings.new SettingObject<Integer>(
-            BoundJumper.class, "passive-cooldown", 7, "# 에어 바운드(2단 점프) 쿨타임") {
+    public static final SettingObject<Integer> PASSIVE_COOLDOWN = abilitySettings.new SettingObject<Integer>(BoundJumper.class, "passive-cooldown", 7, "# 에어 바운드(2단 점프) 쿨타임") {
         @Override
         public boolean condition(Integer value) { return value >= 0; }
+
         @Override
         public String toString() { return Formatter.formatCooldown(getValue()); }
     };
@@ -62,6 +59,7 @@ public class BoundJumper extends AbilityBase implements ActiveHandler {
             getPlayer().setVelocity(velocity);
 
             ParticleLib.CLOUD.spawnParticle(getPlayer().getLocation(), 0.3f, 0.1f, 0.3f, 8, 0.1);
+            ParticleLib.FIREWORKS_SPARK.spawnParticle(getPlayer().getLocation().add(0, 0.3, 0), 0.2f, 0.1f, 0.2f, 10, 0.05);
             SoundLib.ENTITY_BAT_TAKEOFF.playSound(getPlayer().getLocation(), 1.0f, 0.8f);
 
             activeCooldown.start();
@@ -79,7 +77,8 @@ public class BoundJumper extends AbilityBase implements ActiveHandler {
             Vector doubleJump = getPlayer().getVelocity().setY(0.85).multiply(1.1);
             getPlayer().setVelocity(doubleJump);
 
-            ParticleLib.FIREWORKS_SPARK.spawnParticle(getPlayer().getLocation().add(0, -0.2, 0), 0.2f, 0.1f, 0.2f, 6, 0.05);
+            ParticleLib.FIREWORKS_SPARK.spawnParticle(getPlayer().getLocation().add(0, -0.2, 0), 0.2f, 0.1f, 0.2f, 12, 0.05);
+            ParticleLib.CLOUD.spawnParticle(getPlayer().getLocation().add(0, -0.3, 0), 0.25f, 0.1f, 0.25f, 6, 0.05);
             SoundLib.ENTITY_HORSE_JUMP.playSound(getPlayer().getLocation(), 1.0f, 1.4f);
 
             passiveCooldown.start();

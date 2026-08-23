@@ -54,7 +54,6 @@ public class Infection extends Game implements DefaultKitHandler {
                 lines.add("§e총 인원수 : " + count + "명");
                 lines.add("§6===========================");
                 for (String line : lines) Bukkit.broadcastMessage(line);
-                if (getParticipants().size() < 2) { Bukkit.broadcastMessage("§c최소 참가자 수를 충족하지 못하여 게임을 중지합니다. §8(§72명§8)"); stop(); }
                 break;
 
             case 3:

@@ -27,15 +27,13 @@ public class Adrenaline extends AbilityBase {
 
     @SubscribeEvent
     public void onParticipantDeath(ParticipantDeathEvent e) {
-        Player killer = e.getPlayer().getKiller();
-        if (killer == null) return;
+        if (e.getPlayer().getKiller() != getPlayer()) return;
 
-        if (killer.equals(getPlayer())) {
-            getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
-            getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
 
-            SoundLib.ENTITY_PLAYER_LEVELUP.playSound(getPlayer());
-            ParticleLib.VILLAGER_HAPPY.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0.5, 0.5, 0.5, 15, 0.1);
-        }
+        SoundLib.ENTITY_PLAYER_LEVELUP.playSound(getPlayer());
+        ParticleLib.VILLAGER_HAPPY.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0.5, 0.5, 0.5, 15, 0.1);
+        ParticleLib.FLAME.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0.3, 0.5, 0.3, 12, 0.03);
     }
 }

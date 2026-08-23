@@ -2,15 +2,13 @@ package com.bkueAddon.ability.list;
 
 import daybreak.abilitywar.ability.AbilityBase;
 import daybreak.abilitywar.ability.AbilityManifest;
-import daybreak.abilitywar.ability.AbilityManifest.Rank;
-import daybreak.abilitywar.ability.AbilityManifest.Species;
+import daybreak.abilitywar.ability.AbilityManifest.*;
 import daybreak.abilitywar.ability.SubscribeEvent;
-import daybreak.abilitywar.ability.Tips;
 import daybreak.abilitywar.game.AbstractGame.Participant;
+import daybreak.abilitywar.utils.library.ParticleLib;
 import daybreak.abilitywar.utils.library.SoundLib;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
@@ -37,60 +35,39 @@ public class EnchantRich extends AbilityBase {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return false;
 
-        boolean updated = false;
+        boolean equipment = type.name().endsWith("_HELMET") || type.name().endsWith("_CHESTPLATE") || type.name().endsWith("_LEGGINGS") || type.name().endsWith("_BOOTS");
+        boolean weapon = type.name().endsWith("_SWORD") || type.name().endsWith("_AXE");
 
-        if (type.name().endsWith("_HELMET") || type.name().endsWith("_CHESTPLATE") ||
-                type.name().endsWith("_LEGGINGS") || type.name().endsWith("_BOOTS")) {
-            if (!meta.hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL)) {
-                meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-                updated = true;
-            }
+        if (equipment) meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+        if (weapon) {
+            meta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
+            meta.addEnchant(Enchantment.FIRE_ASPECT, 2, true);
         }
+        if (type.getMaxDurability() > 0) meta.addEnchant(Enchantment.DURABILITY, 3, true);
 
-        if (type.name().endsWith("_SWORD") || type.name().endsWith("_AXE")) {
-            if (!meta.hasEnchant(Enchantment.DAMAGE_ALL)) {
-                meta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-                updated = true;
-            }
-            if (!meta.hasEnchant(Enchantment.FIRE_ASPECT)) {
-                meta.addEnchant(Enchantment.FIRE_ASPECT, 2, true);
-                updated = true;
-            }
-        }
-
-        if (type.getMaxDurability() > 0 && !meta.hasEnchant(Enchantment.DURABILITY)) {
-            meta.addEnchant(Enchantment.DURABILITY, 3, true);
-            updated = true;
-        }
-
-        if (updated) {
-            item.setItemMeta(meta);
-        }
-        return updated;
+        item.setItemMeta(meta);
+        return equipment || weapon || type.getMaxDurability() > 0;
     }
 
     @Override
     protected void onUpdate(Update update) {
         if (update == Update.RESTRICTION_CLEAR) {
-            for (ItemStack item : getPlayer().getInventory().getContents()) {
-                applyEnchants(item);
-            }
-            SoundLib.BLOCK_ENCHANTMENT_TABLE_USE.playSound(getPlayer().getLocation(), 1.0f, 1.0f);
+            for (ItemStack item : getPlayer().getInventory().getContents()) applyEnchants(item);
+            ParticleLib.ENCHANTMENT_TABLE.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0.5f, 0.8f, 0.5f, 20, 0.1);
+            SoundLib.BLOCK_ENCHANTMENT_TABLE_USE.playSound(getPlayer(), 1, 1);
         }
     }
 
     @SubscribeEvent
     public void onEntityPickupItem(EntityPickupItemEvent event) {
-        if (event.getEntity().equals(getPlayer())) {
-            applyEnchants(event.getItem().getItemStack());
-        }
+        if (event.getEntity().equals(getPlayer())) applyEnchants(event.getItem().getItemStack());
     }
 
     @SubscribeEvent
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getWhoClicked().equals(getPlayer())) {
             if (applyEnchants(event.getCurrentItem()) || applyEnchants(event.getCursor())) {
-                ((Player) event.getWhoClicked()).updateInventory();
+                ((org.bukkit.entity.Player) event.getWhoClicked()).updateInventory();
             }
         }
     }
@@ -98,9 +75,7 @@ public class EnchantRich extends AbilityBase {
     @SubscribeEvent
     public void onInventoryOpen(InventoryOpenEvent event) {
         if (event.getPlayer().equals(getPlayer())) {
-            for (ItemStack item : event.getInventory().getContents()) {
-                applyEnchants(item);
-            }
+            for (ItemStack item : event.getInventory().getContents()) applyEnchants(item);
         }
     }
 }

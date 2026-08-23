@@ -19,10 +19,12 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 
 @AbilityManifest(name = "블루", rank = Rank.SPECIAL, species = Species.HUMAN, explain = {
         "§7패시브 §8- §b빙결 적응§f: 얼음 위에 있을 때 §6힘 I§f, §3저항 I§f, §b신속 I§f를 얻고, 얼음 위에서 공격하면 대상을 1초간 속박합니다.",
         "§7패시브 §8- §b영구 동토§f: 플레이어를 처치하면 해당 위치 주변 $[RANGE_CONFIG]칸이 얼음으로 변합니다.",
+        "§7패시브 §8- §b빙결 준비§f: 게임 시작 시 §b얼음 §f5개를 지급받습니다.",
         "§7철괴 우클릭 §8- §b빙결 지대§f: 5초 동안 주변 $[RANGE_CONFIG]칸을 얼음으로 바꾸고 범위 내 적을 3초간 속박합니다. $[COOLDOWN_CONFIG]"
 }, summarize = {
         "얼음 위에서 강해지고 적 처치 시 얼음 지형을 생성합니다.",
@@ -115,6 +117,7 @@ public class Blue extends AbilityBase implements ActiveHandler {
     protected void onUpdate(Update update) {
         if (update == Update.RESTRICTION_CLEAR) {
             countdown.start();
+            getPlayer().getInventory().addItem(new ItemStack(Material.ICE, 5));
         }
         if (update == Update.ABILITY_DESTROY) {
             permanentIce.restore();

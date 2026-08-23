@@ -5,9 +5,6 @@ import daybreak.abilitywar.ability.AbilityManifest;
 import daybreak.abilitywar.ability.AbilityManifest.Rank;
 import daybreak.abilitywar.ability.AbilityManifest.Species;
 import daybreak.abilitywar.ability.SubscribeEvent;
-import daybreak.abilitywar.ability.Tips;
-import daybreak.abilitywar.ability.Tips.Level;
-import daybreak.abilitywar.ability.Tips.Stats;
 import daybreak.abilitywar.game.AbstractGame.Participant;
 import daybreak.abilitywar.utils.base.concurrent.TimeUnit;
 import daybreak.abilitywar.utils.base.math.LocationUtil;
@@ -23,10 +20,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @AbilityManifest(name = "저주받은 자", rank = Rank.B, species = Species.HUMAN, explain = {
         "§7패시브 §8- §b순간이동§f: 저주 때문에 45~60초 사이의 랜덤한 시간마다 안전한 무작위 위치로 순간이동합니다. (월드보더 내부 한정)",
-        "§7패시브 §8- §c분노§f: 저주에 대한 분노로 모든 공격의 대미지가 §c1.3배§f로 적용됩니다.",
+        "§7패시브 §8- §c분노§f: 저주에 대한 분노로 모든 공격의 대미지가 §c1.2배§f로 적용됩니다.",
         "§7아이디어 제공 §8- §6goodhyojun"
 }, summarize = {
-        "§7주기적 순간이동§f: 일정 시간마다 무작위 위치로 이동하며, 공격력이 1.3배 증가합니다."
+        "§7주기적 순간이동§f: 일정 시간마다 무작위 위치로 이동하며, 공격력이 1.2배 증가합니다."
 })
 public class CursedOne extends AbilityBase {
 
@@ -52,59 +49,48 @@ public class CursedOne extends AbilityBase {
 
         @Override
         protected void run(int count) {
-            timeToTeleport--;
+            if (--timeToTeleport > 0) return;
 
-            if (timeToTeleport <= 0) {
-                Location currentLoc = getPlayer().getLocation();
-                Location targetLoc = null;
-                int attempts = 0;
+            Location currentLoc = getPlayer().getLocation();
+            Location targetLoc = null;
 
-                while (attempts < 15) {
-                    attempts++;
-                    int randomRadius = ThreadLocalRandom.current().nextInt(15, 36);
-                    Location potentialLoc = LocationUtil.getRandomLocation(currentLoc, randomRadius);
+            for (int attempts = 0; attempts < 15; attempts++) {
+                Location loc = LocationUtil.getRandomLocation(currentLoc, ThreadLocalRandom.current().nextInt(15, 36));
 
-                    if (potentialLoc != null && isInsideWorldBorder(potentialLoc)) {
-                        Block feet = potentialLoc.getBlock();
-                        Block head = potentialLoc.clone().add(0, 1, 0).getBlock();
-
-                        if (!feet.getType().isSolid() && !head.getType().isSolid()) {
-                            targetLoc = potentialLoc;
-                            break;
-                        }
-                    }
+                if (loc != null && isInsideWorldBorder(loc) && !loc.getBlock().getType().isSolid() && !loc.clone().add(0, 1, 0).getBlock().getType().isSolid()) {
+                    targetLoc = loc;
+                    break;
                 }
-
-                if (targetLoc != null) {
-                    SoundLib.ENTITY_ENDERMAN_TELEPORT.playSound(currentLoc, 1.0f, 0.8f);
-                    ParticleLib.PORTAL.spawnParticle(currentLoc.add(0, 1, 0), 0.5f, 0.5f, 0.5f, 20, 0.2);
-
-                    getPlayer().teleport(targetLoc.add(0.5, 0.1, 0.5));
-
-                    SoundLib.ENTITY_ENDERMAN_TELEPORT.playSound(getPlayer().getLocation(), 1.0f, 1.0f);
-                    ParticleLib.PORTAL.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 0.5f, 0.5f, 0.5f, 20, 0.2);
-                }
-                resetRandomTime();
             }
+
+            if (targetLoc != null) {
+                ParticleLib.PORTAL.spawnParticle(currentLoc.add(0, 1, 0), 1, 1, 1, 40, 0.2);
+                SoundLib.ENTITY_ENDERMAN_TELEPORT.playSound(currentLoc, 1.2f, 0.8f);
+
+                getPlayer().teleport(targetLoc.add(0.5, 0.1, 0.5));
+
+                ParticleLib.PORTAL.spawnParticle(getPlayer().getLocation().add(0, 1, 0), 1, 1, 1, 40, 0.2);
+                SoundLib.ENTITY_ENDERMAN_TELEPORT.playSound(getPlayer().getLocation(), 1.2f, 1.0f);
+            }
+
+            resetRandomTime();
         }
 
         private void resetRandomTime() {
-            this.timeToTeleport = ThreadLocalRandom.current().nextInt(45, 61);
+            timeToTeleport = ThreadLocalRandom.current().nextInt(45, 61);
         }
 
         private boolean isInsideWorldBorder(Location loc) {
             WorldBorder border = loc.getWorld().getWorldBorder();
-            double size = border.getSize() / 2.0;
-            double centerX = border.getCenter().getX();
-            double centerZ = border.getCenter().getZ();
-            return (loc.getX() >= centerX - size && loc.getX() <= centerX + size) &&
-                    (loc.getZ() >= centerZ - size && loc.getZ() <= centerZ + size);
+            double size = border.getSize() / 2;
+            double x = border.getCenter().getX();
+            double z = border.getCenter().getZ();
+            return loc.getX() >= x - size && loc.getX() <= x + size && loc.getZ() >= z - size && loc.getZ() <= z + size;
         }
     }
 
     @Override
     protected void onUpdate(Update update) {
-        super.onUpdate(update);
         if (update == Update.RESTRICTION_CLEAR) {
             teleportTimer.start();
         } else if (update == Update.ABILITY_DESTROY) {
@@ -115,7 +101,7 @@ public class CursedOne extends AbilityBase {
     @SubscribeEvent
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getDamager().equals(getPlayer()) && event.getEntity() instanceof LivingEntity) {
-            event.setDamage(event.getDamage() * 1.3);
+            event.setDamage(event.getDamage() * 1.2);
         }
     }
 }
